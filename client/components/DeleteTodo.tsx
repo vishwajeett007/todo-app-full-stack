@@ -10,6 +10,10 @@ function DeleteTodo({ id, todoList, setTodoList }: { id: number, todoList: any[]
                 method: "DELETE",
             })
             const data = await res.json();
+            if (!res.ok) {
+                console.error(data.error || "Failed to delete todo");
+                return;
+            }
             setTodoList(todoList.filter((todo: any) => todo.todo_id !== id));
         } catch (error) {
             console.log(error)

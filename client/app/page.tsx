@@ -10,6 +10,10 @@ export default function Home() {
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/todos/';
         const response = await fetch(`${baseUrl}`);
         const data = await response.json();
+        if (!Array.isArray(data)) {
+            console.error(data.error);
+            return;
+        }
         setTodoList(data);
       } catch (error) {
         console.log(error);

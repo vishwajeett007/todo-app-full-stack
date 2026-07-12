@@ -25,6 +25,10 @@ function EditTodo({ todo, setTodoList }: { todo: any, setTodoList: React.Dispatc
                 body: JSON.stringify({ description })
             })
             const UpdatedTodo = await res.json();
+            if (!res.ok) {
+                console.error(UpdatedTodo.error || "Failed to update todo");
+                return;
+            }
             setTodoList(prev => prev.map(t => t.todo_id === todo.todo_id ? UpdatedTodo : t));
             setIsEditing(false);
         } catch (error) {

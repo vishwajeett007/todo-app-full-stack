@@ -19,6 +19,10 @@ function InputTodo({ setTodoList }: { setTodoList: React.Dispatch<React.SetState
                 body: JSON.stringify(body)
             })
             const json = await response.json();
+            if (!response.ok) {
+                console.error(json.error || "Failed to add todo");
+                return;
+            }
             setTodoList((prevTodoList) => [...prevTodoList, json])
             setDescription("")
         } catch (error) {
