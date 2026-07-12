@@ -25,7 +25,8 @@ app.get("/todos", async (req, res) => {
         const allTodos = await pool.query("SELECT * FROM todo")
         res.json(allTodos.rows);
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message);
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -37,6 +38,7 @@ app.get("/todos/:id", async (req, res) => {
         res.json(todo.rows[0]);
     } catch (error) {
         console.error(error.message);
+        res.status(500).json({ error: error.message });
     }
 })
 //routes-post a todo
@@ -46,7 +48,8 @@ app.post("/todos", async (req, res) => {
         const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", [description])
         res.json(newTodo.rows[0]);
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
+        res.status(500).json({ error: error.message });
     }
 })
 //routes-put a todo
@@ -58,6 +61,7 @@ app.put("/todos/:id", async (req, res) => {
         res.json(updateTodo.rows[0]);
     } catch (error) {
         console.error(error.message);
+        res.status(500).json({ error: error.message });
     }
 })
 
@@ -68,7 +72,8 @@ app.delete("/todos/:id", async (req, res) => {
         const deleteTodo = await pool.query("DELETE FROM todo WHERE todo_id = $1 RETURNING *", [id]);
         res.json("Todo was deleted successfully");
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
+        res.status(500).json({ error: error.message });
     }
 })
 
