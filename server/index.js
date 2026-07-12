@@ -7,7 +7,11 @@ const pool = require("./db")
 // const server = http.createServer(app);
 
 //middlewares
-app.use(cors());//use for allowing requests from different origins
+const allowedOrigins = ["https://todo-app-full-stack-theta.vercel.app", "http://localhost:3000"];
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true
+}));
 app.use(express.json());//use for sending data from client to server in json format and also for url encoded data
 
 //routes
