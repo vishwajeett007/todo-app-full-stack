@@ -18,7 +18,8 @@ function EditTodo({ todo, setTodoList }: { todo: any, setTodoList: React.Dispatc
             return;
         }
         try {
-            const res = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/todos/';
+            const res = await fetch(`${baseUrl}${todo.todo_id}`, {
                 method: "PUT",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({ description })

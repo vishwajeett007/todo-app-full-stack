@@ -9,8 +9,9 @@ function InputTodo({ setTodoList }: { setTodoList: React.Dispatch<React.SetState
         e.preventDefault();
         setLoading(true);
         try {
+            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/todos/';
             const body = { description };
-            const response = await fetch("http://localhost:5000/todos", {
+            const response = await fetch(`${baseUrl}`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

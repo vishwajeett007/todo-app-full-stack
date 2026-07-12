@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
 function DeleteTodo({ id, todoList, setTodoList }: { id: number, todoList: any[], setTodoList: React.Dispatch<React.SetStateAction<any[]>> }) {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/todos/';
     const [loading, setLoading] = useState(false);
     const deleteTodo = async (id: number) => {
         setLoading(true)
         try {
-            const res = await fetch(`http://localhost:5000/todos/${id}`, {
+            const res = await fetch(`${baseUrl}${id}`, {
                 method: "DELETE",
             })
             const data = await res.json();

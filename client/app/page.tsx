@@ -7,7 +7,8 @@ export default function Home() {
   useEffect(() => {
     const getTodo = async () => {
       try {
-        const response = await fetch("http://localhost:5000/todos");
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/todos/';
+        const response = await fetch(`${baseUrl}`);
         const data = await response.json();
         setTodoList(data);
       } catch (error) {
