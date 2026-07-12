@@ -7,7 +7,7 @@ import DeleteTodo from './DeleteTodo';
 function ListTodo({ todoList, setTodoList }: { todoList: any[], setTodoList: React.Dispatch<React.SetStateAction<any[]>> }) {
     return (
         <div className='flex flex-col items-center w-full mt-5'>
-            <h1 className='text-[40px] font-semibold text-left w-full max-w-md'>List Todo</h1>
+            <h1 className='text-[24px] md:text-[40px] font-semibold text-left w-full max-w-md'>List Todo</h1>
             {todoList.map((todo: any) => {
                 return (
                     <div className='flex items-center justify-between w-full max-w-md border-b border-gray-200 p-2' key={todo.todo_id}>

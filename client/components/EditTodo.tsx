@@ -7,6 +7,16 @@ function EditTodo({ todo, setTodoList }: { todo: any, setTodoList: React.Dispatc
     const editTodo = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        if (!description.trim()) {
+            setIsEditing(false);
+            setLoading(false);
+            return;
+        }
+        if (description === todo.description) {
+            setIsEditing(false);
+            setLoading(false);
+            return;
+        }
         try {
             const res = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
                 method: "PUT",
